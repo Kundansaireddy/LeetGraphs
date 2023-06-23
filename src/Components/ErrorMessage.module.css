@@ -1,0 +1,40 @@
+.total {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.shownName {
+  color: red;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: rgb(53, 121, 246);
+  border: 1px solid rgb(53, 121, 246);
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: rgb(246, 121, 51);
+  border: 1px solid rgb(246, 121, 51);
+  color: white;
+}
+
+.actions .button--alt {
+  color: white;
+}
+
+.actions .button {
+  background-color: rgb(53, 121, 246);
+  color: white;
+}
