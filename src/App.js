@@ -4,7 +4,7 @@ import Header from "./Components/Header";
 import ErrorMessage from "./Components/ErrorMessage";
 import NoCharacter from "./Components/NoCharacter";
 import { CChart } from "@coreui/react-chartjs";
-const API_ENDPOINT = "/graphql";
+const API_ENDPOINT = "https://leet-graph-api.onrender.com/";
 
 const App = () => {
   const [userName, setUserName] = useState("");
@@ -17,33 +17,13 @@ const App = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const query = `
-      {
-        userContestRankingHistory(username: "${userName}")
-        {
-          attended
-          trendDirection
-          problemsSolved
-          totalProblems
-          finishTimeInSeconds
-          rating
-          ranking
-          contest
-          {
-            title
-            startTime
-          }
-        }
-      }
-    `;
-
-    const url = `${API_ENDPOINT}?query=${encodeURIComponent(query)}`;
+    const url = `${API_ENDPOINT}${userName}`;
 
     try {
       setIsLoading(true);
       const response = await fetch(url);
       const result = await response.json();
-      const data = result.data.userContestRankingHistory;
+      const data = result.userContestRankingHistory;
       const attendedContests = data.filter(
         (item) =>
           (parseInt(item.contest.title.slice(-3)) > 300 &&
@@ -63,7 +43,6 @@ const App = () => {
         ...prevElements,
         { userName, namesAttendedContests, rankingData },
       ]);
-      // console.log(userCompleteData);
       if (userName.length > 0 && !userIds.includes(userName.toLowerCase())) {
         setUserIds((prevState) => [...prevState, userName.toLowerCase()]);
       }
@@ -87,6 +66,19 @@ const App = () => {
   const hideCartHandler = () => {
     setCartIsShown(false);
     setUserName("");
+  };
+
+  const deleteHandler = async (event, item) => {
+    event.preventDefault();
+    const newIds = userIds.filter((value) => value !== item);
+    setUserIds(newIds);
+    const newUserData = userCompleteData.filter(
+      (value) => value.userName !== item
+    );
+    setUserCompleteData(newUserData);
+    if (newIds.length === 0) {
+      setUserCompleteData([]);
+    }
   };
 
   const isSubmitDisabled = userName.trim().length === 0;
@@ -130,13 +122,22 @@ const App = () => {
           {isLoading && <p>Loading data ...</p>}
 
           {userIds.map((item) => (
-            <a
-              href={`https://leetcode.com/${item}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <button className="displayNameButton">{item}</button>
-            </a>
+            <div>
+              <a
+                href={`https://leetcode.com/${item}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className="displayNameButton">{item}</button>
+              </a>
+              <button
+                className="displayNameButtonNext"
+                onClick={(event) => deleteHandler(event, item)}
+              >
+                {" "}
+                X{" "}
+              </button>
+            </div>
           ))}
         </div>
         <div className="app__problem-list">
@@ -148,7 +149,7 @@ const App = () => {
               </b>
             </div>
           )}
-          {dataNames.length > 0 && (
+          {userCompleteData.length > 0 && (
             <div>
               <CChart
                 type="line"
