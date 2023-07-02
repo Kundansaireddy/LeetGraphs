@@ -1,3 +1,4 @@
+/* App */
 .app {
   display: flex;
   flex-direction: column;
@@ -29,16 +30,16 @@
   box-sizing: border-box;
   border: 2px solid black;
   max-height: 100%;
-  width: 20%;
+  width: 50%;
   position: sticky;
   top: 0;
   overflow-y: scroll;
 }
 
 .app__input {
-  width: 85%;
+  width: 95%;
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .app__button {
@@ -82,7 +83,7 @@
   margin: 0;
 }
 .displayNameButton {
-  width: 100%;
+  width: 90%;
   background-color: #f2f2f2;
   border: 1px solid black;
   border-radius: 4px;
@@ -96,6 +97,22 @@
   background-color: #9bcdd2;
 }
 
+.displayNameButtonNext {
+  display: inline;
+  width: 9%;
+  background-color: #f2f2f2;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 1%;
+}
+.displayNameButtonNext:hover {
+  background-color: red;
+  color: white;
+}
 .app__user-item a {
   text-decoration: none;
   color: black;
@@ -105,11 +122,11 @@
   position: relative;
   flex-grow: 1;
   border: 2px solid black;
-  width: 100%;
+  width: 70%;
   background-color: #fff;
   padding: 20px;
   box-sizing: border-box;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   max-height: 100%;
   margin-left: 3px;
 }
@@ -177,7 +194,7 @@
   cursor: default;
 }
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   border: 1px solid black;
 }
 
@@ -207,8 +224,4 @@
   margin-right: 10px;
   display: flex;
   align-items: center;
-}
-.app__border {
-  margin: 2px;
-  border: 2px solid black;
 }
