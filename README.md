@@ -1,3 +1,5 @@
+![image](https://github.com/Kundansaireddy/LeetGraphs/assets/81676583/38ed3dce-11ad-40b2-b0da-73530415ef50)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
